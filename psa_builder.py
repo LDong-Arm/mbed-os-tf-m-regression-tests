@@ -34,13 +34,13 @@ except ImportError as e:
 
 
 upstream_tfm = "https://git.trustedfirmware.org/TF-M/trusted-firmware-m.git"
-mbed_tfm = "https://github.com/ARMmbed/trusted-firmware-m.git"
+mbed_tfm = "https://github.com/LDong-Arm/trusted-firmware-m.git"
 
 dependencies = {
     # If the remote repo is changed, please delete TARGET_IGNORE folder.
     # Quick switch between remotes is not supported.
     "tf-m": {
-        "trusted-firmware-m": [mbed_tfm, "mbed-tfm-1.1"],
+        "trusted-firmware-m": [mbed_tfm, "fix_plat_test-1.1"],
         "mbed-crypto": [
             "https://github.com/ARMmbed/mbed-crypto.git",
             "mbedcrypto-3.0.1",
