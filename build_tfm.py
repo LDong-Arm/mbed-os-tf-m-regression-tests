@@ -18,7 +18,7 @@ limitations under the License.
 """
 
 import os
-from os.path import join, abspath, dirname, isdir, relpath, split
+from os.path import join, abspath, dirname, exists, isdir, relpath, split
 import argparse
 import glob
 import sys
@@ -344,7 +344,7 @@ def _copy_binaries(source, destination, toolchain, target):
             install_dir = join(install_dir, os.pardir)
             head_tail = split(head_tail[0])
 
-        tfm_veneer = join(install_dir, "export", "tfm", "lib", "s_veneers.o")
+        tfm_veneer = join(install_dir, "interface", "lib", "s_veneers.o")
         shutil.copy2(tfm_veneer, output_dir)
 
 
@@ -512,7 +512,12 @@ def _copy_library(source, toolchain):
                 if not isdir(dirname(dst_file)):
                     os.makedirs(dirname(dst_file))
 
-                shutil.copy2(src_file, dst_file)
+                # TODO: libtfm_test_suite_fwu_ns.a exists for Musca B1 only.
+                # This is to avoid failure on Musca S1.
+                if exists(src_file):
+                    shutil.copy2(src_file, dst_file)
+                else:
+                    logging.info("Skipping " + src_file)
 
 
 def _build_target(tgt, cmake_build_dir, args):
