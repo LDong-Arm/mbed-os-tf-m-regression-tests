@@ -395,7 +395,7 @@ def _get_parser():
         "--cli",
         help="Build with the specified version of Mbed CLI",
         type=int,
-        default=2,
+        default=1,
         choices=[1, 2],
     )
 
