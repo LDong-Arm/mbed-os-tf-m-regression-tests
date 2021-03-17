@@ -36,8 +36,8 @@ dependencies = {
     # Quick switch between remotes is not supported.
     "mbed-tfm": {
         "trusted-firmware-m": [
-            "https://github.com/ARMmbed/trusted-firmware-m.git",
-            "mbed-tfm-1.2",
+            "https://github.com/LDong-Arm/trusted-firmware-m.git",
+            "no_fastread",
         ],
         "tf-m-tests": [
             "https://github.com/ARMmbed/tf-m-tests.git",
