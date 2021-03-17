@@ -26,16 +26,8 @@ int main(void)
     GREENTEA_SETUP(90, "default_auto");
 #endif
 
-    // Use TF-M regression test TIMER1 IRQ handler for the TIMER1 IRQ. The TF-M
-    // IRQ test requires its own handler to be installed.
-    NVIC_SetVector(TFM_TIMER1_IRQ, (uint32_t)TIMER1_Handler);
-
     tfm_log_printf("Starting TF-M regression tests\n");
 
-    // Disable deep sleep to avoid the TF-M IRQ test causing a hang, as the
-    // TF-M IRQ test currently uses an interrupt not necessarily capable of
-    // waking a target from deep sleep, depending on the target.
-    sleep_manager_lock_deep_sleep();
     uint32_t retval = tfm_non_secure_client_run_tests();
     TEST_ASSERT_EQUAL_UINT32(0, retval);
 
@@ -60,12 +52,12 @@ int main(void)
     GREENTEA_SETUP(90, "default_auto");
 #endif
 
-    // Disable deep sleep
-    sleep_manager_lock_deep_sleep();
-
     tfm_log_printf("Starting TF-M PSA API tests\r\n");
 
-    return val_entry();
+    uint32_t retval = val_entry();
+    TEST_ASSERT_EQUAL_UINT32(0, retval);
+
+    return 0;
 }
 
 #endif //MBED_CONF_APP_PSA_COMPLIANCE_TEST
