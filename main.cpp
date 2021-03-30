@@ -23,7 +23,7 @@ int main(void)
 {
 #if MBED_CONF_APP_WAIT_FOR_SYNC
     tfm_log_printf("Waiting for Greentea host\n");
-    GREENTEA_SETUP(600, "default_auto");
+    GREENTEA_SETUP(90, "default_auto");
 #endif
 
     tfm_log_printf("Starting TF-M regression tests\n");
@@ -53,7 +53,7 @@ int main(void)
 {
 #if MBED_CONF_APP_WAIT_FOR_SYNC
     tfm_log_printf("Waiting for Greentea host\n");
-    GREENTEA_SETUP(600, "default_auto");
+    GREENTEA_SETUP(90, "default_auto");
 #endif
 
     // Disable deep sleep
