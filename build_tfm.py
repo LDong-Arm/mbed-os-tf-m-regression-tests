@@ -35,7 +35,7 @@ logging.basicConfig(
     datefmt="%H:%M:%S",
 )
 
-VERSION_FILE_PATH = join(mbed_path, TF_M_RELATIVE_PATH)
+MBED_TF_M_PATH = join(mbed_path, TF_M_RELATIVE_PATH)
 
 
 def _detect_and_write_tfm_version(tfm_dir, commit):
@@ -56,14 +56,14 @@ def _detect_and_write_tfm_version(tfm_dir, commit):
     ]
     tfm_version = run_cmd_and_return(cmd, True)
     logging.info("TF-M version: %s", tfm_version.strip("\n"))
-    if not isdir(VERSION_FILE_PATH):
-        os.makedirs(VERSION_FILE_PATH)
+    if not isdir(MBED_TF_M_PATH):
+        os.makedirs(MBED_TF_M_PATH)
     # Write the version to Mbed OS
-    with open(join(VERSION_FILE_PATH, "VERSION.txt"), "w") as f:
+    with open(join(MBED_TF_M_PATH, "VERSION.txt"), "w") as f:
         f.write(tfm_version)
 
     if commit:
-        _commit_changes(VERSION_FILE_PATH)
+        _commit_changes(MBED_TF_M_PATH)
 
 
 def _clone_tfm_repo(commit):
@@ -566,6 +566,9 @@ def _build_target(tgt, cmake_build_dir, args):
             _copy_psa_libs(cmake_build_dir, ROOT, args)
 
         _copy_tfm_ns_files(cmake_build_dir, tgt[0])
+
+    if args.commit:
+        _commit_changes(MBED_TF_M_PATH)
 
 
 def _build_tfm(args):
