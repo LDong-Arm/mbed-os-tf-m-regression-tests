@@ -329,12 +329,9 @@ def get_tfm_regression_targets():
     with open(join(dirname(__file__), "tfm_ns_import.yaml")) as ns_import:
         yaml_data = yaml.safe_load(ns_import)
         mbed_os_data = yaml_data["mbed-os"]
-        tfm_regression_data = yaml_data["tf-m-regression"]
 
         regression_targets = list(
-            set(get_tfm_secure_targets())
-            & set(mbed_os_data)
-            & set(tfm_regression_data)
+            set(get_tfm_secure_targets()) & set(mbed_os_data)
         )
 
         return regression_targets
