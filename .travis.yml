@@ -74,7 +74,9 @@ matrix:
         - export PATH="$(pwd)/bin:$PATH"
         # Install Mbed CLI and dependencies
         - pip install --upgrade mbed-tools
-        - mbed-tools deploy
+        # TEMPORARY: Use ARMmbed/mbed-os/pull#14582
+        # - mbed-tools deploy
+        - git clone https://github.com/LDong-Arm/mbed-os -b TF-Mv1.3.0_update --depth=1
         - pip install -r mbed-os/requirements.txt
       script:
         # Build TF-M and all tests

@@ -22,7 +22,9 @@ jobs:
           apt-get update -y
           apt-get install -y cmake srecord ninja-build # TF-M dependencies
           cd mbed-os-tf-m-regression-tests
-          git clone --depth=1 --single-branch https://github.com/ARMmbed/mbed-os.git
+          # TEMPORARY: Use ARMmbed/mbed-os/pull#14582
+          # git clone --depth=1 --single-branch https://github.com/ARMmbed/mbed-os.git
+          git clone https://github.com/LDong-Arm/mbed-os -b TF-Mv1.3.0_update --depth=1
       - compile:
           target: "ARM_MUSCA_S1"
       - compile:
